@@ -1,4 +1,6 @@
+import { client } from '@/connection'
 import { Request, Response } from 'express'
+import { ObjectId } from 'mongodb'
 import { z } from 'zod'
 
 const paramsSchema = z.object({
@@ -6,7 +8,7 @@ const paramsSchema = z.object({
   text: z.string(),
 })
 
-export const updateText = (req: Request, res: Response) => {
+export const updateText = async (req: Request, res: Response) => {
   const validationParams = paramsSchema.safeParse({
     id: req.params.id,
     text: req.body.text,
@@ -20,5 +22,19 @@ export const updateText = (req: Request, res: Response) => {
 
   const { id, text } = validationParams.data
 
-  res.status(200).send({ TEMP_status: `Note updated: ${id}`, text })
+  await client
+    .db('k-tasks')
+    .collection('notes')
+    .updateOne(
+      {
+        _id: new ObjectId(id),
+      },
+      {
+        $set: {
+          text,
+        },
+      }
+    )
+
+  res.status(200).send({})
 }
