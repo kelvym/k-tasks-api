@@ -1,4 +1,4 @@
-import { client } from '@/connection'
+import { NotesModel } from '@/models/notes'
 import { Request, Response } from 'express'
 import { ObjectId } from 'mongodb'
 import { z } from 'zod'
@@ -20,21 +20,20 @@ export const updateTitle = async (req: Request, res: Response) => {
     return
   }
 
-  const { id, title } = validationParams.data
-
-  await client
-    .db('k-tasks')
-    .collection('notes')
-    .updateOne(
+  try {
+    await NotesModel.updateOne(
       {
-        _id: new ObjectId(id),
+        _id: new ObjectId(req.params.id),
       },
       {
         $set: {
-          title,
+          title: req.body.title,
         },
       }
     )
 
-  res.status(200).send({})
+    res.status(200).send({})
+  } catch (error) {
+    res.status(500).send({ error: 'An error occurred while updating the note' })
+  }
 }

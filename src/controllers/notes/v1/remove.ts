@@ -1,4 +1,4 @@
-import { client } from '@/connection'
+import { NotesModel } from '@/models/notes'
 import { Request, Response } from 'express'
 import { ObjectId } from 'mongodb'
 import { z } from 'zod'
@@ -18,14 +18,13 @@ export const remove = async (req: Request, res: Response) => {
     return
   }
 
-  const { id } = validationParams.data
-
-  await client
-    .db('k-tasks')
-    .collection('notes')
-    .deleteOne({
-      _id: new ObjectId(id),
+  try {
+    await NotesModel.deleteOne({
+      _id: new ObjectId(req.params.id),
     })
 
-  res.status(200).send({})
+    res.status(200).send({})
+  } catch (error) {
+    res.status(500).send({ error: 'An error occurred while creating the note' })
+  }
 }

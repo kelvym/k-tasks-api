@@ -1,6 +1,6 @@
 import { ClerkExpressRequireAuth } from '@clerk/clerk-sdk-node'
 import express from 'express'
-import notesRouter from './components/notes'
+import notesRouter from './notes'
 
 const router = express.Router()
 
