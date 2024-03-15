@@ -1,10 +1,10 @@
-import { NotesModel } from '@/models/notes'
+import { NoteModel } from '@/models/note'
 import { WithAuthProp } from '@clerk/clerk-sdk-node'
 import { Request, Response } from 'express'
 
 export const create = async (req: WithAuthProp<Request>, res: Response) => {
   try {
-    const note = new NotesModel({
+    const note = new NoteModel({
       externalUserId: req.auth.userId,
       title: '',
       text: '',

@@ -1,9 +1,9 @@
-import { NotesModel } from '@/models/notes'
+import { NoteModel } from '@/models/note'
 import { Request, Response } from 'express'
 
 export const getAll = async (req: Request, res: Response) => {
   try {
-    const result = await NotesModel.find({ externalUserId: req.auth.userId })
+    const result = await NoteModel.find({ externalUserId: req.auth.userId })
 
     res.status(200).send(result)
   } catch (error) {

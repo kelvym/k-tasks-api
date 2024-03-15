@@ -1,4 +1,4 @@
-import { NotesModel } from '@/models/notes'
+import { NoteModel } from '@/models/note'
 import { Request, Response } from 'express'
 import { ObjectId } from 'mongodb'
 import { z } from 'zod'
@@ -19,7 +19,7 @@ export const remove = async (req: Request, res: Response) => {
   }
 
   try {
-    await NotesModel.deleteOne({
+    await NoteModel.deleteOne({
       _id: new ObjectId(req.params.id),
       externalUserId: req.auth.userId,
     })

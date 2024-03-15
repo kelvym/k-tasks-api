@@ -1,9 +1,9 @@
 import { Schema, model } from 'mongoose'
 
-const notesSchema = new Schema({
+const noteSchema = new Schema({
   externalUserId: String,
   title: String,
   text: String,
 })
 
-export const NotesModel = model('Notes', notesSchema)
+export const NoteModel = model('Notes', noteSchema)
