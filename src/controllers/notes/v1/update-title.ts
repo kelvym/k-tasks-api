@@ -11,6 +11,7 @@ const paramsSchema = z.object({
 export const updateTitle = async (req: Request, res: Response) => {
   const validationParams = paramsSchema.safeParse({
     id: req.params.id,
+    externalUserId: req.auth.userId,
     title: req.body.title,
   })
 

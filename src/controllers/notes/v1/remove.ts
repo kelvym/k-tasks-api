@@ -21,10 +21,11 @@ export const remove = async (req: Request, res: Response) => {
   try {
     await NotesModel.deleteOne({
       _id: new ObjectId(req.params.id),
+      externalUserId: req.auth.userId,
     })
 
     res.status(200).send({})
   } catch (error) {
-    res.status(500).send({ error: 'An error occurred while creating the note' })
+    res.status(500).send({ error: 'An error occurred while removing the note' })
   }
 }

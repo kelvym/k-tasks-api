@@ -6,6 +6,7 @@ export const getOne = async (req: Request, res: Response) => {
   try {
     const result = await NotesModel.findOne({
       _id: new ObjectId(req.params.id),
+      externalUserId: req.auth.userId,
     })
 
     res.status(200).send(result)
