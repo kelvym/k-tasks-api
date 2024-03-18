@@ -1,4 +1,10 @@
 {
     "version": 2,
-    "buildCommand": "build"
+    "buildCommand": "build",
+    "builds": [
+        {
+          "src": "dist/index.js",
+          "use": "@now/node"
+        }
+      ]
 }
