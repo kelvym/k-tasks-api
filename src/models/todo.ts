@@ -5,8 +5,8 @@ const todoSchema = new Schema({
   type: String,
   title: String,
   description: String,
-  dateCreated: String,
-  dateFinished: String,
+  dateCreated: Date,
+  dateFinished: { type: Date, required: false },
   level: Number,
   isFinished: Boolean,
 })
