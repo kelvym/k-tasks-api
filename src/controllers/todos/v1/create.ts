@@ -27,6 +27,9 @@ export const create = async (req: WithAuthProp<Request>, res: Response) => {
       title: body.title,
       description: body.description,
       level: body.level,
+      dateCreated: new Date(),
+      dateFinished: null,
+      isFinished: false,
     })
     const result = await todo.save()
 
