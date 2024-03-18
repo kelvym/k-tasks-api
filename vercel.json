@@ -1,10 +1,10 @@
 {
     "version": 2,
-    "buildCommand": "build",
-    "builds": [
+    "routes": [
         {
-          "src": "dist/index.js",
-          "use": "@now/node"
+          "src": "/(.*)",
+          "dest": "dist/index.js"
         }
       ]
+   
 }

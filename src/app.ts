@@ -13,8 +13,7 @@ app.use(express.json())
 app.use(cors())
 app.use(routes)
 
-app.use((err: Error, req: Request, res: Response) => {
-  console.error(err.stack)
+app.use((req: Request, res: Response) => {
   res.status(401).send('Unauthenticated!')
 })
 
